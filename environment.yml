@@ -1,0 +1,32 @@
+# TNGGalaxyLab conda environment specification
+#
+# Create with:
+#     conda env create -f environment.yml
+#     conda activate tnggalaxylab
+#
+# Update an existing environment:
+#     conda env update -f environment.yml --prune
+#
+# This environment is tested with Anaconda Python 3.12 on Windows/Linux/macOS.
+
+name: tnggalaxylab
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12
+  - numpy>=1.24,<2.0
+  - scipy>=1.11,<2.0
+  - matplotlib>=3.7,<4.0
+  - pandas>=2.0,<3.0
+  - h5py>=3.9,<4.0
+  - astropy>=5.3,<7.0
+  - pyyaml>=6.0
+  - requests>=2.28
+  - pip
+  # Development / test dependencies (optional; used only for CI)
+  - pytest>=7.0
+  - pytest-cov>=4.0
+  # Extra: for interactive analysis
+  - jupyterlab>=4.0
+  - ipython>=8.0
