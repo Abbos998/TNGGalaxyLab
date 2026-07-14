@@ -1,5 +1,7 @@
 # TNGGalaxyLab
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21363952.svg)](https://doi.org/10.5281/zenodo.21363952)
+
 [![CI](https://github.com/Abbos998/TNGGalaxyLab/actions/workflows/ci.yml/badge.svg)](https://github.com/Abbos998/TNGGalaxyLab/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/python-3.11%20%7C%203.12-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
