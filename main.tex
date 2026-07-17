@@ -1812,13 +1812,19 @@ machine-readable comma-separated file (\texttt{catalog.csv}) and
 as an equivalent FITS binary table (\texttt{catalog.fits})
 via the code repository (see Data Availability).  Column
 definitions are given in Table~\ref{tab:catalog_columns}; a
-truncated excerpt showing twenty representative disc galaxies
-drawn from the 30-galaxy per-galaxy systematics subsample is
-given in Table~\ref{tab:catalog_excerpt}.
+truncated excerpt showing the twenty most lopsided disc galaxies
+sorted by bootstrap-mean $\Amone$ is given in
+Table~\ref{tab:catalog_excerpt}.
 
 \begin{table}
   \centering
-  \caption{Columns of the TNG50 demonstration catalogue.}
+  \caption{Primary columns of the TNG50 demonstration catalogue.  The
+    machine-readable release contains 29 columns per galaxy in total;
+    the ones listed below are the fields referenced in this paper.
+    Additional columns include integral-variant amplitudes
+    ($A_m^{\rm integral,area}$, $A_m^{\rm integral,Jog}$), the
+    $m=2$ phase-scatter diagnostic, and bar-length bootstrap
+    statistics.}
   \label{tab:catalog_columns}
   \begin{tabular}{lll}
     \toprule
@@ -1837,54 +1843,48 @@ given in Table~\ref{tab:catalog_excerpt}.
     \texttt{pattern\_coherence}   & ---     & $f_{\rm coh}$ quality flag ($m=2$) \\
     \texttt{v\_max\_kms}          & $\kms$  & Peak circular velocity (tracer method) \\
     \texttt{n\_disk\_particles}   & ---     & Star particles inside $|z|<3\kpc$, $R<30\kpc$ \\
-    \texttt{center\_x\_kpc}       & kpc     & Centre coordinate (comoving) \\
-    \texttt{center\_y\_kpc}       & kpc     & Centre coordinate (comoving) \\
-    \texttt{center\_z\_kpc}       & kpc     & Centre coordinate (comoving) \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-\begin{table}
+\begin{table*}
   \centering
-  \caption{Twenty-galaxy excerpt from the TNG50 demonstration catalogue,
-    drawn from the 30-galaxy per-galaxy systematics subsample and sorted
-    by fiducial $\Amone$ in descending order.  Column
-    $\sigma^{\rm sys}(\Amone)$ is the standard deviation of $\Amone$
-    across the five methodological alternatives listed in
-    Table~\ref{tab:systematics}, providing a conservative per-galaxy
-    uncertainty envelope that is larger than the pure bootstrap
-    statistical error but includes methodological choices as well.
-    The complete 915-galaxy catalogue is available in machine-readable
-    form via the code repository (Zenodo DOI:~10.5281/zenodo.21363952).}
+  \caption{Twenty most lopsided disc galaxies from the TNG50-1 sample,
+    sorted by bootstrap-mean $\Amone$ in descending order.  Bootstrap
+    uncertainties are quoted at $1\sigma$ from $N_{\rm boot}=500$
+    resamples.  The complete 915-galaxy catalogue is available in
+    machine-readable form via the code repository
+    (Zenodo DOI: 10.5281/zenodo.21363952).}
   \label{tab:catalog_excerpt}
-  \begin{tabular}{rccc}
+  \begin{tabular}{rcccccc}
     \toprule
-    Subhalo ID  &  $\Rd$ [kpc]  &  $\Amone^{\rm fid}$  &
-    $\sigma^{\rm sys}(\Amone)$  \\
+    Subhalo ID  &  $M_\star$ [$\Msun$]  &  $\Rd$ [kpc]  &
+    $\langle \Amone \rangle$  &  $\langle \Amtwo \rangle$  &
+    $f_{\rm coh}$  &  $L_{\rm bar}$ [kpc] \\
     \midrule
-    592984  &  2.07  &  0.9426  &  0.0497  \\
-    487742  &  3.18  &  0.7518  &  0.0925  \\
-    556304  &  2.48  &  0.2257  &  0.0119  \\
-    647687  &  2.80  &  0.1482  &  0.0143  \\
-    571633  &  4.34  &  0.1473  &  0.0087  \\
-    516101  &  2.26  &  0.1391  &  0.0030  \\
-    602653  &  4.05  &  0.1388  &  0.0058  \\
-    674074  &  4.84  &  0.1357  &  0.0124  \\
-    641149  &  2.16  &  0.1355  &  0.0104  \\
-    658180  &  3.49  &  0.1072  &  0.0158  \\
-    607310  &  5.37  &  0.1049  &  0.0079  \\
-    684910  &  1.98  &  0.1020  &  0.0071  \\
-    625423  &  3.71  &  0.0913  &  0.0048  \\
-    641885  &  1.73  &  0.0853  &  0.0102  \\
-    683249  &  1.78  &  0.0725  &  0.0104  \\
-    674132  &  2.11  &  0.0699  &  0.0060  \\
-    514829  &  3.33  &  0.0686  &  0.0084  \\
-    652446  &  3.54  &  0.0685  &  0.0118  \\
-    645295  &  2.21  &  0.0560  &  0.0071  \\
-    719882  &  1.30  &  0.0558  &  0.0075  \\
+    668581  &  $5.37\!\times\!10^{9}$  &  1.73  &  $0.952 \pm 0.007$  &  $0.302 \pm 0.008$  &  0.91  &  14.81  \\
+    661532  &  $3.24\!\times\!10^{9}$  &  2.04  &  $0.499 \pm 0.022$  &  $0.803 \pm 0.015$  &  0.72  &  2.06  \\
+    646803  &  $3.97\!\times\!10^{9}$  &  1.57  &  $0.455 \pm 0.011$  &  $0.105 \pm 0.012$  &  0.55  &  13.31  \\
+    558067  &  $2.03\!\times\!10^{10}$  &  2.60  &  $0.448 \pm 0.007$  &  $0.502 \pm 0.007$  &  0.81  &  14.81  \\
+    650623  &  $4.87\!\times\!10^{9}$  &  2.67  &  $0.391 \pm 0.011$  &  $0.111 \pm 0.011$  &  0.44  &  14.81  \\
+    620172  &  $4.29\!\times\!10^{9}$  &  2.58  &  $0.380 \pm 0.016$  &  $0.189 \pm 0.020$  &  0.89  &  14.81  \\
+    655323  &  $6.02\!\times\!10^{9}$  &  2.42  &  $0.377 \pm 0.009$  &  $0.194 \pm 0.009$  &  0.73  &  13.31  \\
+    645391  &  $5.79\!\times\!10^{9}$  &  3.82  &  $0.370 \pm 0.010$  &  $0.237 \pm 0.012$  &  0.00  &  14.81  \\
+    657568  &  $4.36\!\times\!10^{9}$  &  2.70  &  $0.368 \pm 0.012$  &  $0.229 \pm 0.010$  &  0.09  &  9.19  \\
+    647768  &  $4.52\!\times\!10^{9}$  &  2.64  &  $0.367 \pm 0.013$  &  $0.336 \pm 0.013$  &  0.73  &  14.81  \\
+    663812  &  $6.39\!\times\!10^{9}$  &  2.01  &  $0.350 \pm 0.011$  &  $0.073 \pm 0.011$  &  0.44  &  14.81  \\
+    594246  &  $6.38\!\times\!10^{9}$  &  1.84  &  $0.330 \pm 0.009$  &  $0.220 \pm 0.009$  &  0.31  &  14.81  \\
+    663308  &  $5.06\!\times\!10^{9}$  &  1.82  &  $0.329 \pm 0.010$  &  $0.084 \pm 0.009$  &  0.18  &  14.44  \\
+    661449  &  $5.21\!\times\!10^{9}$  &  4.18  &  $0.327 \pm 0.009$  &  $0.214 \pm 0.010$  &  0.29  &  14.81  \\
+    578834  &  $1.64\!\times\!10^{10}$  &  3.75  &  $0.316 \pm 0.007$  &  $0.212 \pm 0.007$  &  0.82  &  9.19  \\
+    600743  &  $9.61\!\times\!10^{9}$  &  2.59  &  $0.305 \pm 0.016$  &  $0.203 \pm 0.014$  &  0.93  &  14.81  \\
+    663231  &  $3.28\!\times\!10^{9}$  &  2.47  &  $0.300 \pm 0.016$  &  $0.098 \pm 0.015$  &  0.88  &  14.81  \\
+    715911  &  $5.04\!\times\!10^{9}$  &  1.35  &  $0.298 \pm 0.010$  &  $0.082 \pm 0.008$  &  0.38  &  14.44  \\
+    670767  &  $4.13\!\times\!10^{9}$  &  1.90  &  $0.295 \pm 0.014$  &  $0.065 \pm 0.012$  &  0.09  &  14.81  \\
+    638742  &  $7.03\!\times\!10^{9}$  &  2.22  &  $0.290 \pm 0.008$  &  $0.067 \pm 0.009$  &  0.14  &  14.81  \\
     \bottomrule
   \end{tabular}
-\end{table}
+\end{table*}
 
 
 \bsp
