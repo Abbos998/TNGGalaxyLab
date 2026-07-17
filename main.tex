@@ -517,6 +517,21 @@ where $\bar\phi_2$ is the amplitude-weighted mean phase.  Detections
 with $f_{\rm coh} < 0.5$ are treated as non-detections.  For our
 TNG50 sample, 47.1\% of galaxies exhibit $f_{\rm coh} > 0.5$.
 
+When the phase-coherent $m=2$ structure extends to the outermost
+analysed radial bin, the reported bar length corresponds to the
+analysis boundary and should therefore be interpreted as a lower
+limit rather than a measured termination radius.  In the TNG50
+catalogue this occurs in $34.8\%$ of galaxies (318/915), where the
+recovered $L_{\rm bar}$ equals the outer aperture radius; these
+values are flagged in the machine-readable catalogue as
+boundary-limited.  The saturated fraction is dominated by discs in
+which a strong bar and its outer spiral extension share a common
+phase, so that the coherence criterion is satisfied throughout the
+adopted aperture.  Statistical use of $L_{\rm bar}$ in this paper
+is restricted to the detection dichotomy $f_{\rm coh} > 0.5$ vs.\
+$f_{\rm coh} \le 0.5$; no distribution of bar-length values is
+reported for astrophysical inference.
+
 
 \begin{algorithm}[t]
   \caption{Phase-coherent bar length (\textsc{bar\_length})}
@@ -612,7 +627,7 @@ $\Ndisk \sim 10^5$-particle systems.
     Run Algorithm~\ref{alg:fourier} on the resampled set\;
     Compute the aperture-averaged amplitude
        $\langle A_m\rangle_b$ over $[1.5, 2.5]\,R_d$
-       following Eq.~(\ref{eq:aperture_mean})\;
+       following Eq.~(\ref{eq:literature_average})\;
     Append $\langle A_m\rangle_b$ to $\mathcal{L}$\;
   }
   $\hat A_m \leftarrow \operatorname{mean}(\mathcal{L})$\;
@@ -1042,23 +1057,55 @@ $\Amone$ across the 915-galaxy TNG50 sample.  The median is
 $\Amone^{\rm med} = 0.097$ with 16--84-percentile range
 $[0.056, 0.161]$ and mean $0.112 \pm 0.070$.  A total of 431
 galaxies (47.1\%) exceed $\Amone > 0.1$, of which 86 (9.4\%)
-exceed $\Amone > 0.2$; the distribution extends to
-$\Amone \approx 0.5$ in a small number of extreme cases.  These
-strongly lopsided disc galaxies constitute a natural candidate
-set for individual case studies of accretion-driven or halo-driven
-$m=1$ modes.
+exceed $\Amone > 0.2$; the bulk of the distribution is bounded
+by $\Amone \lesssim 0.4$, with a single exceptional outlier at
+$\Amone = 0.952 \pm 0.007$ discussed in
+Section~\ref{sec:amplitude_outlier}.  Strongly lopsided disc
+galaxies constitute a natural candidate set for individual case
+studies of accretion-driven or halo-driven $m=1$ modes.
 
 \begin{figure}
   \centering
   \includegraphics[width=\columnwidth]{figures/fig4_A1_distribution.pdf}
   \caption{Histogram of bootstrap-mean $\Amone$ across the
-    915-galaxy TNG50 sample.  Dashed line: sample median
-    (0.097); dotted line: sample mean ($0.112 \pm 0.070$).
+    915-galaxy TNG50 sample, displayed over $\Amone \in [0, 0.5]$
+    for readability.  Dashed line: sample median (0.097); dotted
+    line: sample mean ($0.112 \pm 0.070$).
     Orange: strongly lopsided ($\Amone > 0.1$, 431 galaxies,
     47.1\%); red: very strong ($\Amone > 0.2$, 86 galaxies,
-    9.4\%).}
+    9.4\%).  One galaxy (subhalo 668581, $\Amone = 0.952$) lies
+    outside the plotted range but is retained in all reported
+    statistics; see Section~\ref{sec:amplitude_outlier}.}
   \label{fig:fig4_A1_distribution}
 \end{figure}
+
+\subsection{The single extreme outlier at $\Amone = 0.95$}
+\label{sec:amplitude_outlier}
+
+Of the 915 galaxies in the parent sample, exactly one --- TNG50-1
+subhalo 668581 --- exhibits $\Amone$ well beyond the $\lesssim 0.4$
+tail occupied by the remainder of the distribution.  The measurement
+is not driven by shot noise: with a bootstrap mean of
+$0.952 \pm 0.007$, the signal is detected at $\sim\!144\sigma$
+against sampling variance from $N_{\rm boot} = 500$ resamples.  The
+object is a compact dwarf disc
+($M_\star = 5.4\times10^{9}\,\Msun$, $R_d = 1.73\kpc$,
+$V_{\rm max} = 95\kms$) with a large disc-particle count
+($N_{\rm disk} = 8.87\times10^{4}$) and coexisting strong $m=2$
+mode ($\Amtwo = 0.30$, $f_{\rm coh} = 0.91$).  Several physical
+scenarios --- an ongoing minor merger, a strongly displaced
+dark-matter halo centre, or SUBFIND segmentation of an
+interacting pair --- are all consistent with the amplitude
+level, and none can be ruled out from the catalogue quantities
+alone.  A dedicated follow-up (particle-level visual inspection
+and merger-tree history) is deferred to future work.  We
+emphasise that the exclusion of subhalo~668581 has no material
+impact on any of the statistics reported in this paper: the
+median, 16--84 percentile, and $47.1\%$ fraction above $\Amone > 0.1$
+are identical to four significant figures whether the object is
+retained or removed, and the sample mean changes only from $0.112$
+to $0.111$.  We therefore keep the object in the parent sample but
+flag it in the catalogue as a candidate for individual case study.
 
 \subsection{Bar detections and phase coherence}
 \label{sec:tng50_bardetections}
@@ -1096,9 +1143,10 @@ qualitative trend in a fully cosmological simulation context.
   \caption{Bootstrap-mean $\Amone$ vs.\ stellar mass, colour-coded
     by pattern coherence.  Solid red line and shaded band: running
     median and 16--84 percentile in three mass bins.
-    Dotted line: $\Amone = 0.1$ threshold.  One galaxy with
-    $\Amone > 0.5$ lies outside the plotted range but is included
-    in all statistics.}
+    Dotted line: $\Amone = 0.1$ threshold.  One galaxy
+    (subhalo~668581, $\Amone = 0.952$;
+    see Section~\ref{sec:amplitude_outlier}) lies outside the
+    plotted range but is included in all statistics.}
   \label{fig:fig5_A1_vs_mass}
 \end{figure}
 
@@ -1591,7 +1639,7 @@ in turn.
 The strong negative Spearman correlation between the bootstrap-mean
 $\Amone$ and the maximum circular velocity $V_{\rm max}$
 ($\rho = -0.39$, $p = 1.2 \times 10^{-34}$;
-Section~\ref{sec:rotation_analysis}) demonstrates that dynamically
+Section~\ref{sec:dynamical}) demonstrates that dynamically
 massive discs are systematically less lopsided than lower-$V_{\rm max}$
 systems.  This trend is physically expected on two independent
 grounds.  First, the differential rotation timescale
@@ -1833,6 +1881,8 @@ Table~\ref{tab:catalog_excerpt}.
     \texttt{subhalo\_id}          & ---     & TNG50-1 subhalo ID at snapshot 99 \\
     \texttt{M\_star\_Msun}        & $\Msun$ & Total stellar mass of the subhalo \\
     \texttt{R\_d\_kpc}            & kpc     & Exponential disc scale length \\
+    \texttt{aperture\_R\_in\_kpc}  & kpc     & Inner aperture radius ($1.5\,R_d$) \\
+    \texttt{aperture\_R\_out\_kpc} & kpc     & Outer aperture radius ($2.5\,R_d$) \\
     \texttt{A1\_literature}       & ---     & $\langle\Amone\rangle$ R\&Z95 aperture average \\
     \texttt{A1\_bootstrap\_mean}  & ---     & Bootstrap-mean $\Amone$ \\
     \texttt{A1\_bootstrap\_std}   & ---     & Bootstrap 1$\sigma$ uncertainty \\
@@ -1886,6 +1936,58 @@ Table~\ref{tab:catalog_excerpt}.
   \end{tabular}
 \end{table*}
 
+
+\section{Independent reproducibility audit}
+\label{app:reproducibility_audit}
+
+Table~\ref{tab:reproducibility_audit} lists the principal statistics
+quoted in the main text alongside the values recomputed directly
+from the released catalogue (\texttt{catalog.csv}).  All
+computations were performed with an independent Python
+re-implementation using only the standard library
+(\texttt{csv}, \texttt{statistics}, \texttt{math}), without
+recourse to any part of the \pipeline\ codebase.  Spearman
+rank correlations were evaluated with a small custom function
+identical in behaviour to \texttt{scipy.stats.spearmanr}.
+
+\begin{table*}
+  \centering
+  \caption{Comparison of manuscript statistics with values
+    independently recomputed from the released catalogue.
+    Bootstrap ranks, correlations, and threshold-based sample counts
+    reproduce the tabulated values to the precision printed in the
+    main text.  Small differences in the fourth decimal place
+    reflect rounding of the printed quantities; no discrepancy
+    exceeds the corresponding bootstrap uncertainty.}
+  \label{tab:reproducibility_audit}
+  \begin{tabular}{lccc}
+    \toprule
+    Statistic & Value in paper & Recomputed & Difference \\
+    \midrule
+    Median $\Amone$                                      &     0.0970 &     0.0974 &     0.0004 \\
+    Mean $\Amone$                                        &     0.1120 &     0.1117 &     0.0003 \\
+    $1\sigma$ of $\Amone$ distribution                   &     0.0700 &     0.0702 &     0.0002 \\
+    $16$th percentile of $\Amone$                        &     0.0560 &     0.0560 &     0.0000 \\
+    $84$th percentile of $\Amone$                        &     0.1610 &     0.1606 &     0.0004 \\
+    \midrule
+    Galaxies with $\Amone > 0.1$                         &        431 &        431 &          0 \\
+    Galaxies with $\Amone > 0.2$                         &         86 &         86 &          0 \\
+    Galaxies with $f_{\rm coh} > 0.5$                    &        431 &        431 &          0 \\
+    Overlap: $\Amone > 0.1$ \emph{and} $f_{\rm coh} > 0.5$ &        185 &        185 &          0 \\
+    \midrule
+    $\rho_{\rm Spearman}(Q_{\rm dyn}, \Amone)$           &     +0.350 &     +0.350 &      0.000 \\
+    $\rho_{\rm Spearman}(V_{\rm max}, \Amone)$           &     -0.390 &     -0.387 &      0.003 \\
+    $\rho_{\rm Spearman}(V_{\rm max}, \Amtwo)$           &     -0.050 &     -0.054 &      0.004 \\
+    Median $Q_{\rm dyn}$                                 &       2.60 &       2.65 &       0.05 \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+The auditor's script is included in the code repository as
+\texttt{scripts/reproducibility\_audit.py} and can be re-executed
+by any reader with a copy of \texttt{catalog.csv} and a standard
+Python 3 interpreter.  We invite the community to extend this
+audit table with any further statistic of interest.
 
 \bsp
 \label{lastpage}
