@@ -1812,7 +1812,8 @@ machine-readable comma-separated file (\texttt{catalog.csv}) and
 as an equivalent FITS binary table (\texttt{catalog.fits})
 via the code repository (see Data Availability).  Column
 definitions are given in Table~\ref{tab:catalog_columns}; a
-truncated excerpt showing the twenty most lopsided galaxies is
+truncated excerpt showing twenty representative disc galaxies
+drawn from the 30-galaxy per-galaxy systematics subsample is
 given in Table~\ref{tab:catalog_excerpt}.
 
 \begin{table}
@@ -1824,54 +1825,66 @@ given in Table~\ref{tab:catalog_excerpt}.
     Column & Unit & Description \\
     \midrule
     \texttt{subhalo\_id}          & ---     & TNG50-1 subhalo ID at snapshot 99 \\
-    \texttt{M\_star\_Msun}         & $\Msun$ & Total stellar mass of the subhalo \\
-    \texttt{R\_d\_kpc}             & kpc     & Exponential disc scale length \\
-    \texttt{A1\_literature}        & ---     & $\langle\Amone\rangle$ R\&Z95 aperture average \\
-    \texttt{A1\_bootstrap\_mean}   & ---     & Bootstrap-mean $\Amone$ \\
-    \texttt{A1\_bootstrap\_std}    & ---     & Bootstrap 1$\sigma$ uncertainty \\
-    \texttt{A2\_bootstrap\_mean}   & ---     & Bootstrap-mean $\Amtwo$ \\
-    \texttt{A2\_bootstrap\_std}    & ---     & Bootstrap 1$\sigma$ uncertainty on $\Amtwo$ \\
-    \texttt{bar\_length\_kpc}      & kpc     & Phase-coherent bar length (0 if none) \\
-    \texttt{bar\_angle\_deg}       & deg     & Position angle of the bar \\
-    \texttt{pattern\_coherence}    & ---     & $f_{\rm coh}$ quality flag ($m=2$) \\
-    \texttt{v\_max\_kms}           & $\kms$\   & Peak circular velocity (tracer method) \\
-    \texttt{n\_disk\_particles}    & ---     & Star particles inside $|z|<3\kpc$, $R<30\kpc$ \\
-    \texttt{center\_x\_kpc}        & kpc     & Centre coordinate (comoving) \\
-    \texttt{center\_y\_kpc}        & kpc     & Centre coordinate (comoving) \\
-    \texttt{center\_z\_kpc}        & kpc     & Centre coordinate (comoving) \\
+    \texttt{M\_star\_Msun}        & $\Msun$ & Total stellar mass of the subhalo \\
+    \texttt{R\_d\_kpc}            & kpc     & Exponential disc scale length \\
+    \texttt{A1\_literature}       & ---     & $\langle\Amone\rangle$ R\&Z95 aperture average \\
+    \texttt{A1\_bootstrap\_mean}  & ---     & Bootstrap-mean $\Amone$ \\
+    \texttt{A1\_bootstrap\_std}   & ---     & Bootstrap 1$\sigma$ uncertainty \\
+    \texttt{A2\_bootstrap\_mean}  & ---     & Bootstrap-mean $\Amtwo$ \\
+    \texttt{A2\_bootstrap\_std}   & ---     & Bootstrap 1$\sigma$ uncertainty on $\Amtwo$ \\
+    \texttt{bar\_length\_kpc}     & kpc     & Phase-coherent bar length (0 if none) \\
+    \texttt{bar\_angle\_deg}      & deg     & Position angle of the bar \\
+    \texttt{pattern\_coherence}   & ---     & $f_{\rm coh}$ quality flag ($m=2$) \\
+    \texttt{v\_max\_kms}          & $\kms$  & Peak circular velocity (tracer method) \\
+    \texttt{n\_disk\_particles}   & ---     & Star particles inside $|z|<3\kpc$, $R<30\kpc$ \\
+    \texttt{center\_x\_kpc}       & kpc     & Centre coordinate (comoving) \\
+    \texttt{center\_y\_kpc}       & kpc     & Centre coordinate (comoving) \\
+    \texttt{center\_z\_kpc}       & kpc     & Centre coordinate (comoving) \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-\begin{table*}
+\begin{table}
   \centering
-  \caption{Excerpt from the TNG50 demonstration catalogue, showing
-    the twenty most lopsided disc galaxies sorted by bootstrap-mean
-    $\langle\Amone\rangle$.  This table is auto-populated by the
-    \texttt{generate\_catalog\_appendix.py} script (distributed with
-    the pipeline) from the local \texttt{catalog.csv}.
-    The complete 915-galaxy catalogue is available in
-    machine-readable form (Zenodo DOI to be assigned).
-    Bootstrap uncertainties are quoted at 1$\sigma$.}
+  \caption{Twenty-galaxy excerpt from the TNG50 demonstration catalogue,
+    drawn from the 30-galaxy per-galaxy systematics subsample and sorted
+    by fiducial $\Amone$ in descending order.  Column
+    $\sigma^{\rm sys}(\Amone)$ is the standard deviation of $\Amone$
+    across the five methodological alternatives listed in
+    Table~\ref{tab:systematics}, providing a conservative per-galaxy
+    uncertainty envelope that is larger than the pure bootstrap
+    statistical error but includes methodological choices as well.
+    The complete 915-galaxy catalogue is available in machine-readable
+    form via the code repository (Zenodo DOI:~10.5281/zenodo.21363952).}
   \label{tab:catalog_excerpt}
-  \begin{tabular}{rccccc}
+  \begin{tabular}{rccc}
     \toprule
-    Subhalo ID  &  $M_\star$ [$\Msun$]  &  $\Rd$ [kpc]  &
-    $\langle \Amone \rangle$  &  $\langle \Amtwo \rangle$  &
-    $f_{\rm coh}$ \\
+    Subhalo ID  &  $\Rd$ [kpc]  &  $\Amone^{\rm fid}$  &
+    $\sigma^{\rm sys}(\Amone)$  \\
     \midrule
-    558067  &  ---  &  ---  &  $0.448 \pm 0.007$  &  ---  &  0.81 \\
-    490079  &  ---  &  ---  &  $0.276$            &  ---  &  ---  \\
-    562338  &  ---  &  ---  &  $0.260$            &  ---  &  ---  \\
-    530852  &  ---  &  ---  &  $0.246$            &  ---  &  0.97 \\
-    556304  &  ---  &  ---  &  $0.230$            &  ---  &  0.18 \\
-    562742  &  ---  &  ---  &  $0.229$            &  ---  &  0.23 \\
-    486917  &  ---  &  ---  &  $0.225$            &  ---  &  1.00 \\
-    533998  &  ---  &  ---  &  $0.214$            &  ---  &  0.43 \\
-    \multicolumn{6}{c}{\textit{...twelve additional entries; run \texttt{generate\_catalog\_appendix.py} to fill in.}} \\
+    592984  &  2.07  &  0.9426  &  0.0497  \\
+    487742  &  3.18  &  0.7518  &  0.0925  \\
+    556304  &  2.48  &  0.2257  &  0.0119  \\
+    647687  &  2.80  &  0.1482  &  0.0143  \\
+    571633  &  4.34  &  0.1473  &  0.0087  \\
+    516101  &  2.26  &  0.1391  &  0.0030  \\
+    602653  &  4.05  &  0.1388  &  0.0058  \\
+    674074  &  4.84  &  0.1357  &  0.0124  \\
+    641149  &  2.16  &  0.1355  &  0.0104  \\
+    658180  &  3.49  &  0.1072  &  0.0158  \\
+    607310  &  5.37  &  0.1049  &  0.0079  \\
+    684910  &  1.98  &  0.1020  &  0.0071  \\
+    625423  &  3.71  &  0.0913  &  0.0048  \\
+    641885  &  1.73  &  0.0853  &  0.0102  \\
+    683249  &  1.78  &  0.0725  &  0.0104  \\
+    674132  &  2.11  &  0.0699  &  0.0060  \\
+    514829  &  3.33  &  0.0686  &  0.0084  \\
+    652446  &  3.54  &  0.0685  &  0.0118  \\
+    645295  &  2.21  &  0.0560  &  0.0071  \\
+    719882  &  1.30  &  0.0558  &  0.0075  \\
     \bottomrule
   \end{tabular}
-\end{table*}
+\end{table}
 
 
 \bsp
