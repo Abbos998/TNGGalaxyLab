@@ -35,9 +35,9 @@
 \newcommand{\pipeline}{\textsc{TNGGalaxyLab}}
 \newcommand{\todo}[1]{\textcolor{red}{\textbf{[#1]}}}
 
-\title[TNGGalaxyLab: Fourier pipeline for disc galaxies]{%
-  \pipeline: A Reproducible Fourier Pipeline for Non-Axisymmetric
-  Structure in Simulated Disc Galaxies}
+\title[Fourier decomposition of TNG50 disc galaxies]{%
+  Fourier decomposition of non-axisymmetric structure in 915
+  TNG50 disc galaxies with the reproducible \pipeline\ pipeline}
 
 \author[S. N. Nuritdinov et al.]{%
     S. N. Nuritdinov$^{1}$, K. T. Mirtadjieva$^{1}$, A.U. Omonov$^{1}$\thanks{E-mail: abbos.omonov@nuu.uz}\orcidlink{0000-0000-0000-0000},\\
@@ -94,7 +94,7 @@ quantitative support for a resolution-dependent recovery of disc
 lopsidedness in the IllustrisTNG family of simulations.
 The pipeline is publicly available at
 \url{https://github.com/Abbos998/TNGGalaxyLab}
-(Zenodo DOI: 10.5281/zenodo.XXXXXXX).
+(Zenodo DOI: to be assigned on acceptance).
 \end{abstract}
 
 \begin{keywords}
@@ -186,6 +186,24 @@ resolution limitations of TNG100 and to the ``overquenching''
 tendency of the IllustrisTNG feedback model.  Independent
 methodological work is therefore of community interest, particularly
 using the higher-resolution TNG50 run.
+
+General-purpose simulation-analysis frameworks such as \textsc{pynbody},
+\textsc{yt}, and the Illustris Python module provide efficient particle
+I/O and generic reduction primitives, but none of them ships a
+validated, error-quantified Fourier decomposition tailored to
+lopsidedness and bar analysis.  \pipeline\ complements these
+frameworks along three specific axes: (i) a synthetic-galaxy
+validation suite that quantifies recovery bias and shot-noise
+scaling for each mode (Section~\ref{sec:validation}); (ii) percentile
+bootstrap uncertainties on every reported amplitude and phase, which
+allow amplitude--amplitude and amplitude--mass correlations to be
+tested at physically meaningful significance; and (iii) the
+GADGET-2 $\sqrt{a}$ velocity convention specific to IllustrisTNG
+snapshots, which is required for internally consistent angular-momentum
+diagonalisation but is not automatically applied by generic loaders.
+Together these features close the gap between generic analysis
+libraries and the dedicated, publication-quality Fourier
+catalogues required for statistical studies of disc lopsidedness.
 
 \subsection{This work}
 
@@ -471,11 +489,12 @@ is optionally supported when $\Sigma_0(R)$ is supplied.
 \end{algorithm}
 
 \subsection{Bar length: phase-coherent definition}
+\label{sec:bar_length}
 
 Naive amplitude-threshold estimators
 ($L_{\rm bar} = \max\{R : \Am{2}(R) > 0.2\}$) suffer from
 shot-noise contamination in the outer disc.  Bar identification via the radial extent of the $m=2$ Fourier amplitude follows a long-established tradition
-\citep{Ohta+1990,Athanassoula+Misiriotis2002,Erwin2005}.
+\citep{1990ApJ...357...71O,2002MNRAS.330...35A,2005MNRAS.364..283E}.
 Following \citet{2005A&A...434..109A}, we adopt a phase-coherence
 criterion.  Let $R_{\rm peak}$ be the radius of the $\Am{2}$ maximum, with phase $\phi_2^{\rm ref} = \phi_2(R_{\rm peak})$.  The bar length is the
 largest radius $R$ satisfying
@@ -728,7 +747,7 @@ $\chi^2$ distribution, and encloses all data points.
 \end{figure}
 
 \subsection{Radial profiles}
-
+\label{sec:radial_profiles}
 Figure \ref{fig:fig3_radial_profiles} shows the recovered radial
 $\Am{m}(R)$ profiles at $N = 10^5$, on a logarithmic vertical
 scale showing both signal and shot-noise floor
@@ -753,7 +772,7 @@ aperture capturing the region of highest signal-to-noise.
 \subsection{Extended validation: inclination, centring, and particle loss}
 \label{sec:extended_validation}
 
-The tests in Sections~\ref{sec:validation_recovery}--\ref{sec:radial_profiles}
+The tests in Sections~\ref{sec:validation_recovery}-\ref{sec:radial_profiles}
 demonstrate that the pipeline correctly recovers analytic Fourier
 amplitudes in a face-on, fully-sampled, perfectly-centred synthetic
 galaxy.  Real cosmological analyses, however, must contend with three
@@ -919,9 +938,9 @@ detections from shot-noise fluctuations
 amplitude-averaging convention.  The pipeline emits three
 independent global amplitudes for each galaxy — the R\&Z95 aperture
 mean $\Amone^{\rm lit}$
-(Eq.~\ref{eq:aperture_mean}), the area-weighted radial integral
+(Eq.~\ref{eq:literature_average}), the area-weighted radial integral
 $\Amone^{\rm area}$, and the Jog+2002 $\Sigma$-weighted integral
-$\Amone^{\rm Jog}$ (Eq.~\ref{eq:jog_average}) — allowing a direct
+$\Amone^{\rm Jog}$ (Eq.~\ref{eq:jog_integral}) — allowing a direct
 same-galaxy comparison.  Figure~\ref{fig:fig10_parameter_sensitivity}
 summarises both analyses.
 
@@ -995,16 +1014,16 @@ closing off two potential sources of systematic uncertainty.
 \label{sec:sample_selection}
 
 TNG50-1 is the highest-resolution realisation of the IllustrisTNG
-suite \citep{Springel+2018,Pillepich+2018,Marinacci+2018,Naiman+2018},
-run with the moving-mesh code \textsc{arepo} \citep{Springel2010}
+suite \citep{2018MNRAS.475..676S,2018MNRAS.473.4077P,2018MNRAS.480.5113M,2018MNRAS.477.1206N},
+run with the moving-mesh code \textsc{AREPO} \citep{2010MNRAS.401..791S}
 and the TNG galaxy-formation model including kinetic AGN feedback
-\citep{Weinberger+2017}.  First results on stellar and gaseous
-disc structure are presented in \citet{Pillepich+2019} and
+\citep{2019MNRAS.490.3234N}.  First results on stellar and gaseous
+disc structure are presented in \citet{2019MNRAS.490.3196P} and
 \citet{2019MNRAS.490.3196P}; all data used here are drawn from the public
 data release \citep{2019ComAC...6....2N}.
 
 We select all central subhalos from the TNG50-1 simulation
-\citep{2019ComAC...6....2N,Pillepich+2019} at snapshot 99 ($z=0$) with
+\citep{2019ComAC...6....2N,2019MNRAS.490.3196P} at snapshot 99 ($z=0$) with
 stellar mass in the range $3.16\times10^9 < M_\star / \Msun <
 10^{11}$.  This yields a parent population of 923 subhalos meeting
 the mass criterion.  We process the \emph{complete} parent sample,
@@ -1047,7 +1066,7 @@ $m=1$ modes.
 47.1\% of the sample exhibit coherent $m=2$ patterns
 ($f_{\rm coh} > 0.5$), broadly consistent with the visually
 identified bar fractions in nearby-galaxy surveys
-\citep[e.g.][]{Sheth+2010}.  The phase-coherence quality flag
+\citep[e.g.][]{2010PASP..122.1397S,2015ApJS..217...32B}.  The phase-coherence quality flag
 plays an important role: of the 86 galaxies with $\Amone > 0.2$,
 only a subset pass $f_{\rm coh} > 0.5$; the rest show large
 $\Amone$ values but incoherent radial phase, indicating that
@@ -1133,11 +1152,11 @@ which approximately measures the enclosed dynamical-to-stellar
 mass ratio $M_{\rm dyn}(<R_{V_{\rm max}})/M_\star$ within the
 radius of peak rotation.  This is a compact global diagnostic
 that requires no velocity-dispersion measurement, and should not
-be confused with the classical \citet{Toomre1964} $Q$ parameter,
+be confused with the classical \citet{1964ApJ...139.1217T} $Q$ parameter,
 with the effective multi-component stability parameter of
-\citet{Romeo+Wiegert2011}, or with the
+\citet{2011MNRAS.416.1191R}, or with the
 Efstathiou--Lake--Negroponte bar-stability parameter
-\citep{Efstathiou+1982}, all of which measure distinct physical
+\citep{1982MNRAS.199.1069E}, all of which measure distinct physical
 quantities.
 $Q_{\rm dyn} \gg 1$ marks systems in which the total dynamical
 mass within $R_{V_{\rm max}}$ substantially exceeds the stellar
@@ -1196,14 +1215,14 @@ systems, exactly as expected from linear stability theory
 \citet{2013ApJ...772..135Z} apply an $m=1$ Fourier decomposition to a
 sample of 167 nearby galaxies observed at $3.6\,\mu$m as part of
 the Spitzer Survey of Stellar Structure in Galaxies
-\citep[S$^{4}$G;][]{Sheth+2010} --- a volume-limited imaging
+\citep[S$^{4}$G;][]{2010PASP..122.1397S,2015ApJS..217...32B} --- a volume-limited imaging
 survey of 2352 nearby galaxies with uniform photometry
-\citep{MunozMateos+2015} and morphological classification
-\citep{Buta+2015} --- using the identical
+\citep{2015ApJS..219....3M} and morphological classification
+\citep{2015ApJS..217...32B} --- using the identical
 inner radial aperture $[1.5, 2.5]\,\Rd$ as our pipeline.  Our
 stellar-mass matching adopts the $3.6\,\mu$m mass-to-light
-calibration of \citet{Meidt+2014} with the solar absolute
-magnitude of \citet{Willmer2018}.  This
+calibration of \citet{2014ApJ...788..144M} with the solar absolute
+magnitude of \citet{2018ApJS..236...47W}.  This
 provides a rare opportunity for methodologically consistent
 apples-to-apples comparison.
 
@@ -1241,7 +1260,7 @@ comparing against the raw Zaritsky sample is dominated by sample
 selection (the low-mass tail of the observational sample), not by
 a genuine simulation--observation discrepancy.  This finding
 complements the mass-dependent trends reported by
-\citet{Frankel+2022} for TNG100 and provides quantitative
+\citet{2022ApJ...940...61F} for TNG100 and provides quantitative
 support for the accuracy of IllustrisTNG feedback physics in
 the disc-scale-height regime probed here.
 
@@ -1249,19 +1268,19 @@ the disc-scale-height regime probed here.
 To ensure that our conclusions do not depend on the choice of the
 Kolmogorov--Smirnov statistic alone, we repeat both comparisons with
 three additional measures: the Mann--Whitney $U$ test
-\citep[rank-based location shift;][]{Mann+Whitney1947}, the
+\citep[rank-based location shift;][]{10.1214/aoms/1177730491}, the
 Anderson--Darling $k$-sample test \citep[weighted sensitivity to
-distribution tails;][]{Scholz+Stephens1987}, and Cliff's $\delta$
-\citep[non-parametric effect size;][]{Cliff1993}.  For the TNG50-vs.-mass-matched
+distribution tails;][]{Scholz01091987}, and Cliff's $\delta$
+\citep[non-parametric effect size;][]{Cliff1993DominanceSO}.  For the TNG50-vs.-mass-matched
 comparison, all four tests are consistent with the KS conclusion of
-statistical indistinguishability: Mann--Whitney $U = 18310$
-($p = 0.15$), Anderson--Darling $T = 0.23$ ($p = 0.25$), and Cliff's
+statistical indistinguishability: Mann-Whitney $U = 18310$
+($p = 0.15$), Anderson-Darling $T = 0.23$ ($p = 0.25$), and Cliff's
 $\delta = +0.14$, corresponding to a ``negligible'' effect on the
-\citet{Romano+2006} scale.  For the TNG50-vs.-full-sample
+\citet{article} scale.  For the TNG50-vs.-full-sample
 comparison, all four tests confirm a highly significant difference,
 with Mann--Whitney $p = 10^{-23}$, Anderson--Darling $T = 66.8$,
 and a ``large'' effect size ($\delta = -0.49$; Cohen's $d = -0.85$,
-\citealt{Cohen1988}).
+\citealt{cohen1988statistical}).
 A tabulated summary of all statistics is provided in the
 supplementary catalogue release
 (\texttt{additional\_statistics.md}).  These consistency checks
@@ -1579,7 +1598,7 @@ grounds.  First, the differential rotation timescale
 $t_{\rm dyn} \sim 2\pi R / V_{\rm rot}$ sets the winding rate at
 which any perturbation is sheared into an $m=2$ pattern; discs with
 higher $V_{\rm rot}$ therefore erase $m=1$ modes on shorter
-timescales through phase mixing \citep{Sellwood2014}.  Second, in
+timescales through phase mixing \citep{2014RvMP...86....1S}.  Second, in
 the framework of \citet{2005A&A...438..507B}, non-axisymmetric $m=1$
 modes are excited by cold-gas accretion misaligned with the disc
 plane.  Because gas accretion rates onto low-mass discs are
@@ -1605,7 +1624,7 @@ Physically, in low-stellar-mass systems the disc self-gravity is
 too weak to sustain a strong $m=2$ bar-like response that would
 otherwise drain the $m=1$ reservoir into higher-order structure
 via non-linear mode coupling
-\citep{Athanassoula+1985,Sellwood2014}.  Instead, external
+\citep{1986MNRAS.221..213A,2014RvMP...86....1S}.  Instead, external
 perturbations --- cold gas accretion, minor mergers, tidal
 interactions --- imprint long-lived $m=1$ modes on these
 dynamically ``quiet'' discs.  Conversely, the low-$Q_{\rm dyn}$,
@@ -1623,12 +1642,12 @@ in this framework: bars are locked-in structures that persist
 even in fast-rotating discs, while lopsidedness is dissipated by
 rotation.  This is consistent with the slow secular evolution of
 bars once formed
-\citep{Combes+Sanders1981,1993RPPh...56..173S,Debattista+Sellwood2000}
+\citep{1981A&A....96..164C,1993RPPh...56..173S,2000ApJ...543..704D}
 and with the observed weak dependence of bar frequency on
-dynamical mass \citep{Erwin2018}.  Bar populations in
+dynamical mass \citep{2018MNRAS.474.5372E}.  Bar populations in
 IllustrisTNG itself have been characterised by
-\citet{RosasGuevara+2020}, and fast bars remain a point of
-tension with $\Lambda$CDM haloes \citep{Fragkoudi+2021}.
+\citet{2020MNRAS.491.2547R}, and fast bars remain a point of
+tension with $\Lambda$CDM haloes \citep{2021A&A...650L..16F}.
 
 
 \subsection{Mass dependence and cosmological context}
@@ -1723,12 +1742,12 @@ disc galaxies from the full TNG50 sample; (ii) apply the pipeline
 to alternative gravity zoom simulations
 \citep[e.g.][]{}; and (iii) implement
 the Tremaine--Weinberg pattern-speed diagnostic
-\citep{TremaineWeinberg1984} for barred galaxies.
+\citep{1984ApJ...282L...5T} for barred galaxies.
 
 The \pipeline\ code and full TNG50 catalogue are publicly
 available at
 \url{https://github.com/Abbos998/TNGGalaxyLab}
-(Zenodo DOI: 10.5281/zenodo.XXXXXXX).
+(Zenodo DOI: to be assigned on acceptance).
 
 
 \section*{Data Availability}
@@ -1756,13 +1775,13 @@ scripts distributed in the repository.
 We thank the anonymous referee for constructive comments that helped improve this manuscript.  A.O.\ thanks the IllustrisTNG collaboration for providing public access to the simulation data.  This research made extensive use of the NASA Astrophysics Data System (ADS).
 This work made use of the IllustrisTNG public data release
 \citep{2019ComAC...6....2N} and the S$^{4}$G data release
-\citep{Sheth+2010}.  \pipeline\ development was supported by the
+\citep{2010PASP..122.1397S,2015ApJS..217...32B}.  \pipeline\ development was supported by the
 National University of Uzbekistan.
 
 We acknowledge use of the open-source software \textsc{NumPy}
-\citep{Harris+2020}, \textsc{SciPy} \citep{Virtanen+2020},
-\textsc{Matplotlib} \citep{Hunter2007}, \textsc{Astropy}
-\citep{AstropyCollaboration2022}, and \textsc{h5py}.
+\citep{2020Natur.585..357H}, \textsc{SciPy} \citep{2020NaMet..17..261V},
+\textsc{Matplotlib} \citep{2007CSE.....9...90H}, \textsc{Astropy}
+\citep{2022ApJ...935..167A}, and \textsc{h5py}.
 
 \bibliographystyle{mnras}
 \bibliography{refs}
