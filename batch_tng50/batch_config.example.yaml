@@ -1,0 +1,43 @@
+# TNG50 Batch Processing Configuration
+# ============================================================
+# This is the exact configuration used to generate the 915-galaxy
+# TNG50-1 catalogue reported in the manuscript.
+#
+# To reproduce the catalogue:
+#   1. Register at https://www.tng-project.org/users/register/
+#   2. Copy this file to `batch_config.yaml`
+#   3. Replace API_TOKEN_HERE with your personal TNG API token
+#   4. Run the pipeline (see README.md, "Quickstart" section)
+#
+# Do NOT commit the populated `batch_config.yaml` to public git.
+
+# ---- TNG API credentials ----
+api_token: "API_TOKEN_HERE"
+
+# ---- Simulation and snapshot ----
+simulation: "TNG50-1"
+snapshot: 99                       # z = 0
+
+# ---- Subhalo selection filter ----
+# NOTE: exponent must have + sign for PyYAML 1.1 to parse as float
+stellar_mass_min: 3.16e+9          # Msun (log10 M* > 9.5)
+stellar_mass_max: 1.0e+11          # Msun (log10 M* < 11.0)
+max_subhalos: 1000                 # returns 923 subhalos after filtering,
+                                   # of which 915 survive disc-quality cuts
+
+# ---- Output layout ----
+output_dir:      "batch_output"
+cutouts_dir:     "batch_output/cutouts"
+processed_dir:   "batch_output/processed"
+catalog_file:    "batch_output/catalog"
+
+# ---- Rate limiting (be polite to the TNG API) ----
+request_delay: 1.5                 # seconds between cutout requests
+max_retries: 3
+retry_backoff: 5.0                 # exponential backoff base
+
+# ---- Pipeline parameters (as reported in the manuscript) ----
+r_out_kpc: 15.0                    # outer edge of radial Fourier grid
+n_bins: 40                         # radial bins (bin width = 0.375 kpc)
+m_max: 4                           # highest Fourier mode analysed
+n_bootstrap: 200                   # bootstrap resamples per galaxy

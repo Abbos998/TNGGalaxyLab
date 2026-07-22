@@ -10,6 +10,11 @@ Only the Python standard library is used (csv, statistics, math);
 no part of the tnggalaxylab pipeline is imported.  The output
 reproduces Table C1 (Appendix C) of the paper.
 
+Bootstrap statistical uncertainties in the released catalogue are
+based on N_boot = 200 resamples (see batch_config.example.yaml).
+This script uses only the pre-computed bootstrap-mean and bootstrap-std
+columns and does not itself run bootstrap.
+
 Usage:
     python reproducibility_audit.py [PATH_TO_catalog.csv]
 
