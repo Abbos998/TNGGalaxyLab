@@ -50,6 +50,9 @@ from tnggalaxylab.core.center import Centering
 # 1. TNG cutout yuklash + birliklarni fizik qiymatlarga aylantirish
 # ---------------------------------------------------------------------------
 
+BOX_CKPC_H = {"TNG50-1": 35000.0, "TNG100-1": 75000.0, "TNG300-1": 205000.0}
+
+
 def load_tng_stars(path: str) -> dict:
     """
     Load TNG cutout stellar particles, applying Stage 3 CRITICAL fix A.1:
@@ -81,6 +84,14 @@ def load_tng_stars(path: str) -> dict:
     masses     = masses[stellar_mask]
     velocities = velocities[stellar_mask]
     potential  = potential[stellar_mask]
+
+    # Periodic-boundary unwrap around the potential minimum (ckpc/h).
+    # Without it, galaxies near the box edge lose particles to the
+    # opposite side of the box and acquire a spurious m=1 signal.
+    _box = BOX_CKPC_H.get(str(sim))
+    if _box is not None and len(coords) > 0:
+        _ref = coords[np.argmin(potential)]
+        coords = (coords - _ref + 0.5 * _box) % _box - 0.5 * _box + _ref
 
     velocities_kms = velocities * np.sqrt(a)         # km/s
     coords_kpc     = coords * a / h                  # kpc
