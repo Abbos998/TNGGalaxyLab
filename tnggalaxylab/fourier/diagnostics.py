@@ -169,7 +169,8 @@ def compute_pattern_diagnostics(
         # Bar angle: amplitude-weighted circular mean of m=2 phase
         if A2_sel.sum() > 0:
             w2 = A2_sel / A2_sel.sum()
-            bar_angle = float(np.angle(np.sum(w2 * np.exp(1j * Phi2_sel))))
+            # phi_2 has period pi: average exp(2i phi_2) and halve
+            bar_angle = float(0.5 * np.angle(np.sum(w2 * np.exp(2j * Phi2_sel))))
         else:
             bar_angle = np.nan
 
@@ -200,7 +201,7 @@ def compute_pattern_diagnostics(
             for i in range(peak_idx, len(r_sel)):
                 if A2_sel[i] <= bar_threshold:
                     break
-                dphi = (Phi2_sel[i] - ref_phi + np.pi) % (2 * np.pi) - np.pi
+                dphi = (Phi2_sel[i] - ref_phi + np.pi / 2) % np.pi - np.pi / 2
                 if abs(dphi) > coherence_tol:
                     break
                 bar_length = float(r_sel[i])
@@ -214,14 +215,14 @@ def compute_pattern_diagnostics(
         if not np.isnan(bar_angle) and len(Phi2_sel) > 0:
             strong = A2_sel > bar_threshold
             if strong.any():
-                delta_phi = (Phi2_sel[strong] - bar_angle + np.pi) % (2 * np.pi) - np.pi
+                delta_phi = (Phi2_sel[strong] - bar_angle + np.pi / 2) % np.pi - np.pi / 2
                 coherent_frac = float(np.mean(np.abs(delta_phi) < coherence_tol))
             else:
                 coherent_frac = 0.0
         else:
             coherent_frac = np.nan
 
-        phase_scatter_m2 = _circular_std(Phi2_sel)
+        phase_scatter_m2 = 0.5 * _circular_std(2.0 * Phi2_sel)
     else:
         A2_sel = np.zeros(mask.sum())
         bar_angle   = np.nan

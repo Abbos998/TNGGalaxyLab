@@ -160,7 +160,7 @@ def plot_sensitivity(cat: pd.DataFrame, thr_tbl: pd.DataFrame,
                 zorder=2)
 
     ax.set_xlabel(r"Coherence threshold $f_{\rm coh}$")
-    ax.set_ylabel(r"Bar-detection fraction [\%]")
+    ax.set_ylabel("Bar-detection fraction [%]")
     ax.set_title("Panel A: Threshold sensitivity", fontsize=11)
     ax.set_xlim(0.25, 0.95)
     ax.set_ylim(0, max(y) * 1.15)

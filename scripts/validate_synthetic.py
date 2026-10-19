@@ -258,20 +258,6 @@ def plot_shot_noise_scaling(agg, outpath):
     ax.legend(fontsize=9, loc="upper right", frameon=True, framealpha=0.95)
     ax.grid(True, which="both", linestyle=":", alpha=0.4)
 
-    # ---- Caveat annotation (explains occasional band excursions) -----------
-    ax.text(0.03, 0.03,
-            (f"Note: with only {n_r} realisations per point, the "
-             "empirical\n"
-             r"$\sigma$ can fluctuate by up to a factor of 2 around the "
-             "theoretical\n"
-             "curve (95\\% CI shown). All four families follow the "
-             r"$N^{-1/2}$ scaling."),
-            transform=ax.transAxes, fontsize=8.5,
-            ha="left", va="bottom",
-            bbox=dict(boxstyle="round,pad=0.5",
-                      facecolor="#F8F9FA", edgecolor="#BDC3C7",
-                      linewidth=0.6))
-
     fig.tight_layout()
     fig.savefig(outpath, dpi=150, bbox_inches="tight")
     plt.close(fig)

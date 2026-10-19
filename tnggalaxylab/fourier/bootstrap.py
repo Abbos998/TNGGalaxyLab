@@ -161,7 +161,7 @@ def bootstrap_fourier(
         bar_length_mean=float(np.mean(bl_stack)) if bl_stack else None,
         bar_length_std=float(np.std(bl_stack))  if bl_stack else None,
         bar_angle_mean=float(np.degrees(
-            np.angle(np.mean(np.exp(1j * np.array(ba_stack)[~np.isnan(ba_stack)])))
+            0.5 * np.angle(np.mean(np.exp(2j * np.array(ba_stack)[~np.isnan(ba_stack)])))
         )) if ba_stack else None,
         bar_angle_std=None,  # filled below
     )
@@ -170,9 +170,9 @@ def bootstrap_fourier(
         ba_arr = np.array(ba_stack)
         ba_arr = ba_arr[~np.isnan(ba_arr)]
         if len(ba_arr) > 1:
-            R_bar_ba = np.abs(np.mean(np.exp(1j * ba_arr)))
+            R_bar_ba = np.abs(np.mean(np.exp(2j * ba_arr)))
             R_bar_ba = np.clip(R_bar_ba, 0.0, 1.0)
-            ba_std_rad = float(np.sqrt(-2.0 * np.log(R_bar_ba + 1e-15)))
+            ba_std_rad = float(0.5 * np.sqrt(-2.0 * np.log(R_bar_ba + 1e-15)))
             result["bar_angle_std"] = float(np.degrees(ba_std_rad))
 
     return result
@@ -198,4 +198,4 @@ def _bar_angle(profile: FourierProfile, r_in: float, r_out: float) -> float:
     if A2.sum() <= 0:
         return np.nan
     w = A2 / A2.sum()
-    return float(np.angle(np.sum(w * np.exp(1j * Phi2))))
+    return float(0.5 * np.angle(np.sum(w * np.exp(2j * Phi2))))
